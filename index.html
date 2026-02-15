@@ -131,9 +131,324 @@
   </section>
 
   <section id="schedule" class="container">
-    <h2>Schedule</h2>
-    <p>Details coming soon.</p>
-  </section>
+  <h2>Schedule</h2>
+  <p>This is place holder.</p>
+  <div class="schedule-wrap">
+    <table class="schedule-table" id="scheduleTable" aria-label="MLSS schedule table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <!-- JS will add date columns -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JS will add rows -->
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- =========================
+     Modal (Abstract popup)
+     Put this once per page
+     ========================= -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <p class="modal-title" id="modalTitle">Speaker — Title</p>
+        <p class="modal-sub" id="modalSub">Date · Time</p>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">Close</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // =========================
+  // 1) Date range (inclusive)
+  // =========================
+  const startDate = new Date("2027-03-01T00:00:00");
+  const endDate   = new Date("2027-03-12T00:00:00");
+
+  function addDays(d, n){
+    const x = new Date(d);
+    x.setDate(x.getDate() + n);
+    return x;
+  }
+  function isoDate(d){
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,"0");
+    const dd = String(d.getDate()).padStart(2,"0");
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  function prettyDate(d){
+    // e.g., "Mar 1 (Mon)"
+    const md = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    const wd = d.toLocaleDateString("en-US", { weekday: "short" });
+    return `${md} (${wd})`;
+  }
+
+  const days = [];
+  for(let d = new Date(startDate); d <= endDate; d = addDays(d, 1)){
+    days.push(new Date(d));
+  }
+
+  // =========================
+  // 2) Time slots (editable)
+  // =========================
+  const slots = [
+    { key:"09:00-10:30", label:"09:00–10:30" },
+    { key:"10:30-11:00", label:"10:30–11:00" }, // Coffee
+    { key:"11:00-12:30", label:"11:00–12:30" },
+    { key:"13:00-14:00", label:"13:00–14:00" }, // Lunch
+    { key:"14:00-15:30", label:"14:00–15:30" },
+    { key:"15:30-16:00", label:"15:30–16:00" }, // Coffee
+    { key:"16:00-17:30", label:"16:00–17:30" },
+    { key:"18:00-19:00", label:"18:00–19:00" }  // Posters / Event
+  ];
+
+  // =========================
+  // 3) Data (placeholders)
+  // scheduleData[YYYY-MM-DD][slotKey] = { type, speaker, title, abstract }
+  // type: "talk" | "break" | "event"
+  // =========================
+  const scheduleData = {};
+
+const lectureSlots = new Set(["09:00-10:30","11:00-12:30","14:00-15:30","16:00-17:30"]);
+const coffeeSlots  = new Set(["10:30-11:00","15:30-16:00"]);
+const lunchSlots   = new Set(["13:00-14:00"]);
+const eveningSlots = new Set(["18:00-19:00"]);
+
+for(const d of days){
+  const day = isoDate(d);
+  const weekday = d.getDay(); // 0=Sun, 6=Sat
+  scheduleData[day] = {};
+
+  // ===== Sunday: No schedule =====
+  if (weekday === 0){
+    for(const s of slots){
+      scheduleData[day][s.key] = {
+        type:"empty",
+        speaker:"",
+        title:"",
+        abstract:""
+      };
+    }
+    continue;
+  }
+
+  // ===== Saturday: Excursion =====
+  if (weekday === 6){
+    for(const s of slots){
+      scheduleData[day][s.key] = {
+        type:"event",
+        speaker:"Excursion",
+        title:"Excursion Day",
+        abstract:"Details of the excursion will be announced."
+      };
+    }
+    continue;
+  }
+
+  // ===== Weekdays: Normal MLSS schedule =====
+  for(const s of slots){
+    if (coffeeSlots.has(s.key)){
+      scheduleData[day][s.key] = {
+        type:"break",
+        speaker:"Coffee Break",
+        title:"",
+        abstract:""
+      };
+    }
+    else if (lunchSlots.has(s.key)){
+      scheduleData[day][s.key] = {
+        type:"break",
+        speaker:"Lunch Break",
+        title:"",
+        abstract:""
+      };
+    }
+    else if (eveningSlots.has(s.key)){
+      scheduleData[day][s.key] = {
+        type:"event",
+        speaker:"Poster Session",
+        title:"Poster / Social",
+        abstract:"Poster session and discussion."
+      };
+    }
+    else{
+      scheduleData[day][s.key] = {
+        type:"talk",
+        speaker:"speaker",
+        title:"title",
+        abstract:"(placeholder)\nWrite the abstract here."
+      };
+    }
+  }
+}  
+
+  // Example overrides (optional)
+  scheduleData["2027-03-01"]["09:00-10:30"] = {
+    type:"talk",
+    speaker:"speaker",
+    title:"title",
+    abstract:"(placeholder)\nExample abstract for the first slot."
+  };
+
+  // =========================
+  // 4) Build table HTML
+  // =========================
+const table = document.getElementById("scheduleTable");
+const theadRow = table.querySelector("thead tr");
+const tbody = table.querySelector("tbody");
+
+// Add date headers
+for(const d of days){
+  const th = document.createElement("th");
+  th.textContent = prettyDate(d);
+  th.dataset.date = isoDate(d);
+  theadRow.appendChild(th);
+}
+
+// Track if weekend cell already inserted
+const weekendInserted = {};
+
+// Rows
+for(let rowIndex=0; rowIndex<slots.length; rowIndex++){
+  const slot = slots[rowIndex];
+  const tr = document.createElement("tr");
+
+  const timeTh = document.createElement("th");
+  timeTh.className = "time";
+  timeTh.textContent = slot.label;
+  tr.appendChild(timeTh);
+
+  for(const d of days){
+    const day = isoDate(d);
+    const weekday = d.getDay(); // 0=Sun,6=Sat
+
+    // ===== Weekend handling =====
+    if(weekday === 6 || weekday === 0){
+
+      // already created rowspan cell → skip
+      if(weekendInserted[day]) continue;
+
+      // only first row creates it
+      if(rowIndex === 0){
+        const td = document.createElement("td");
+        td.rowSpan = slots.length;
+
+        const box = document.createElement("div");
+        box.className = "session event";
+        box.style.height = "100%";
+        box.style.display = "flex";
+        box.style.alignItems = "center";
+        box.style.justifyContent = "center";
+        box.style.textAlign = "center";
+        box.style.fontWeight = "bold";
+
+        if(weekday === 6){
+          box.innerHTML = "<div>Excursion Day</div>";
+        } else {
+          box.classList.remove("event");
+          box.classList.add("empty");
+          box.innerHTML = "<div>No Schedule</div>";
+        }
+
+        td.appendChild(box);
+        tr.appendChild(td);
+        weekendInserted[day] = true;
+      }
+      continue;
+    }
+
+    // ===== Normal weekday =====
+    const cellData = scheduleData?.[day]?.[slot.key];
+
+    const td = document.createElement("td");
+    const box = document.createElement("div");
+    box.className = "session";
+
+    if (cellData?.type === "break") box.classList.add("break");
+    if (cellData?.type === "event") box.classList.add("event");
+
+    const sp = document.createElement("p");
+    sp.className = "speaker";
+    sp.textContent = cellData?.speaker ?? "";
+
+    const ti = document.createElement("p");
+    ti.className = "title";
+    ti.textContent = cellData?.title ?? "";
+
+    box.appendChild(sp);
+    if (ti.textContent) box.appendChild(ti);
+
+    if (cellData?.type === "talk" || cellData?.type === "event"){
+      box.dataset.date = day;
+      box.dataset.slot = slot.key;
+      box.dataset.speaker = cellData.speaker ?? "";
+      box.dataset.title = cellData.title ?? "";
+      box.dataset.abstract = cellData.abstract ?? "";
+      box.dataset.type = cellData.type ?? "talk";
+
+      const hint = document.createElement("div");
+      hint.className = "hint";
+      hint.textContent = "Click to view abstract";
+      box.appendChild(hint);
+    }
+
+    td.appendChild(box);
+    tr.appendChild(td);
+  }
+
+  tbody.appendChild(tr);
+}
+  // =========================
+  // 5) Modal logic
+  // =========================
+  const backdrop = document.getElementById("modalBackdrop");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalSub = document.getElementById("modalSub");
+  const modalBody = document.getElementById("modalBody");
+  const modalClose = document.getElementById("modalClose");
+
+  function openModal({speaker, title, date, slot, abstract}){
+    modalTitle.textContent = `${speaker} — ${title || "(no title)"}`;
+    modalSub.textContent = `${date} · ${slot}`;
+    modalBody.textContent = abstract || "(no abstract)";
+    backdrop.style.display = "flex";
+    backdrop.setAttribute("aria-hidden","false");
+  }
+  function closeModal(){
+    backdrop.style.display = "none";
+    backdrop.setAttribute("aria-hidden","true");
+  }
+
+  document.addEventListener("click", (e) => {
+    const box = e.target.closest(".session");
+    if(!box) return;
+    const type = box.dataset.type;
+    if(type !== "talk" && type !== "event") return;
+
+    openModal({
+      speaker: box.dataset.speaker,
+      title: box.dataset.title,
+      date: box.dataset.date,
+      slot: box.dataset.slot,
+      abstract: box.dataset.abstract
+    });
+  });
+
+  modalClose.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", (e) => {
+    if(e.target === backdrop) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeModal();
+  });
+</script>
 
   <section id="venue" class="container">
     <h2>Venue</h2>

@@ -89,3 +89,220 @@ footer {
   background-color: #0077b6;
   color: white;
 }
+
+/* =========================
+   MLSS Schedule (add-on)
+   ========================= */
+
+/* Container内で横スクロール可能にする */
+.schedule-wrap {
+  margin-top: 1.2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+}
+
+/* Schedule table base */
+.schedule-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 1100px; /* 画面が狭い時は横スクロール */
+  width: max-content;
+  background: #fff;
+}
+
+/* Header row */
+.schedule-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Sticky time column */
+.schedule-table thead th:first-child {
+  left: 0;
+  z-index: 4;
+  border-right: 1px solid #e5e7eb;
+}
+
+.schedule-table tbody th.time {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #666;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Cells */
+.schedule-table td {
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  padding: 8px;
+  vertical-align: top;
+  background: #f9fafb;
+  min-width: 220px;  /* day column width */
+  max-width: 220px;
+}
+
+.schedule-table tr td:last-child,
+.schedule-table thead tr th:last-child {
+  border-right: none;
+}
+
+/* Session box inside each td */
+.session {
+  border-radius: 12px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  min-height: 64px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.session:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.session .speaker {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.session .title {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.session .hint {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #666;
+}
+
+/* Break / event styles */
+.session.break {
+  background: #eaf2ff;       /* light blue */
+  border-color: #cfe0ff;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+
+.session.event {
+  background: #fff4cc;       /* light amber */
+  border-color: #ffe49a;
+}
+
+/* Make break boxes non-hovery */
+.session.break:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Optional: compact mode on small screens */
+@media (max-width: 700px) {
+  .schedule-table td {
+    min-width: 180px;
+    max-width: 180px;
+  }
+}
+
+/* =========================
+   Modal (Abstract popup)
+   ========================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;              /* JSでflexに */
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 9999;
+}
+
+.modal {
+  width: min(820px, 100%);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.modal-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 900;
+  color: #111;
+}
+
+.modal-sub {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.modal-close {
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.modal-close:hover {
+  background: #f3f4f6;
+}
+
+.modal-body {
+  padding: 14px 16px 18px;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap; /* abstract改行保持 */
+  color: #222;
+}
+
+.session.empty{
+  background: #ffffff;
+  border: none;
+  box-shadow: none;
+  font-weight: bold;
+  color: #888;
+}
