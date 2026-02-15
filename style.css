@@ -51,6 +51,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -64,13 +65,13 @@ h2 {
   padding: 1rem;
   text-align: center;
 
-  /* ★重要：中央配置コンテナにする */
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  transition: transform 0.2s ease;
 }
 
-/* ★ここが本質：幅100%をやめる */
 .card img {
   width: 200px;
   height: 200px;
@@ -78,12 +79,9 @@ h2 {
   border-radius: 10px;
 }
 
-}
-
 .card:hover {
   transform: translateY(-5px);
 }
-
 
 footer {
   text-align: center;
