@@ -53,8 +53,8 @@ h2 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
 }
 
 .card {
@@ -63,19 +63,27 @@ h2 {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 1rem;
   text-align: center;
-  transition: transform 0.2s ease;
+
+  /* ★重要：中央配置コンテナにする */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ★ここが本質：幅100%をやめる */
+.card img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 }
 
 .card:hover {
   transform: translateY(-5px);
 }
 
-.card img {
-  width: 100%;
-  border-radius: 10px;
-  height: 350px;
-  object-fit: cover;
-}
 
 footer {
   text-align: center;
