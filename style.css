@@ -384,21 +384,24 @@ h2 {
 
 .travel-img {
   display: block;
-  max-width: 100%;
+  max-width: 560px;
+  width: 100%;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
-  margin: 1rem 0;
+  margin: 1rem auto;
 }
 
 .travel-img--small {
   max-width: 280px;
+  margin: 1rem 0;
 }
 
 .travel-img-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin: 1rem 0 1.5rem;
+  max-width: 720px;
 }
 
 .travel-img-grid figure {
@@ -428,6 +431,11 @@ h2 {
 @media (max-width: 768px) {
   .travel-img-grid { grid-template-columns: repeat(2, 1fr); }
   .travel-img--small { max-width: 100%; }
+  .travel-img { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .travel-img-grid { grid-template-columns: 1fr; }
 }
 
 /* =========================
