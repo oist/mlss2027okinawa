@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application — Machine Learning Summer School 2027 Okinawa</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="application.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Machine Learning Summer School 2027</h1>
+      <p>Okinawa Institute of Science and Technology, Onna, Okinawa, Japan | March 1–12, 2027</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-inner">
+      <ul id="navMenu">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#registration">Registration</a></li>
+        <li><a href="index.html#speakers">Speakers</a></li>
+        <li><a href="index.html#schedule">Schedule</a></li>
+        <li><a href="index.html#organizers">Organizers</a></li>
+        <li><a href="index.html#venue">Venue</a></li>
+        <li><a href="index.html#travel">Travel</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ===== Hero strip ===== -->
+    <div class="app-hero container">
+      <h2 class="app-page-title">Application</h2>
+      <p class="app-subtitle">
+        Applications for MLSS Okinawa 2027 are expected to open in <strong>August 2026</strong>.
+        All applications are collected through <a href="https://openreview.net/group?id=OIST.jp/2027/MLSS_Okinawa" target="_blank" rel="noopener noreferrer">OpenReview</a>.
+        No application fee is required.
+      </p>
+      <a class="btn-primary"
+         href="https://openreview.net/group?id=OIST.jp/2027/MLSS_Okinawa"
+         target="_blank" rel="noopener noreferrer">
+        Apply on OpenReview
+      </a>
+    </div>
+
+    <!-- ===== Important Dates ===== -->
+    <section class="container app-section">
+      <h2>Important Dates</h2>
+      <p>All deadlines are in <strong>UTC</strong> unless otherwise noted.</p>
+      <table class="app-table">
+        <thead>
+          <tr><th>Milestone</th><th>Date</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Applications Open</td><td>August 1, 2026</td></tr>
+          <tr><td>Poster Abstract Deadline</td><td>September 30, 2026</td></tr>
+          <tr><td>CV &amp; References Due</td><td>October 10, 2026</td></tr>
+          <tr><td>Acceptance Notices Sent</td><td>November 1, 2026 (23:00 UTC)</td></tr>
+          <tr><td>Registration Opens</td><td>November 10, 2026 (10:00 JST)</td></tr>
+          <tr><td>Registration Fee Payment Deadline</td><td>November 30, 2026</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== Eligibility ===== -->
+    <section class="container app-section">
+      <h2>Eligibility</h2>
+      <p>
+        MLSS Okinawa 2027 is open to all applicants. We aim to select approximately
+        <strong>200 highly motivated participants</strong>. Our primary target audience is:
+      </p>
+      <ul class="app-list">
+        <li>Master's and PhD students with a strong technical background in machine learning related research topics.</li>
+      </ul>
+      <p>
+        A limited number of spots may be available for:
+      </p>
+      <ul class="app-list">
+        <li>Postdoctoral researchers, staff scientists, and faculty members</li>
+        <li>Industry practitioners (who may attend through company sponsorship)</li>
+        <li>Outstanding undergraduate students</li>
+      </ul>
+      <p>
+        All applicants are expected to have:
+      </p>
+      <ul class="app-list app-list--check">
+        <li>Programming proficiency in Python</li>
+        <li>Genuine interest in machine learning</li>
+        <li>Foundational knowledge of linear algebra, calculus, probability, and statistics</li>
+      </ul>
+    </section>
+
+    <!-- ===== Required Documents ===== -->
+    <section class="container app-section">
+      <h2>Application Materials</h2>
+      <p>All materials are submitted through OpenReview. Required documents:</p>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <div class="doc-icon">📄</div>
+          <h3>Poster Abstract</h3>
+          <p>Title and abstract of the poster you plan to present. The poster may cover ongoing projects or undergraduate work — publication is not required.</p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">✍️</div>
+          <h3>Statement of Motivation</h3>
+          <p>A concise statement explaining your background, research interests, and why you want to attend MLSS Okinawa 2027.</p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">📋</div>
+          <h3>Curriculum Vitae</h3>
+          <p>Your CV in PDF format, including your academic and research history.</p>
+        </div>
+        <div class="doc-card doc-card--optional">
+          <div class="doc-icon">📎</div>
+          <h3>Supplementary Materials <span class="tag-optional">Optional</span></h3>
+          <p>Papers, technical reports, GitHub profile, or other materials demonstrating your work.</p>
+        </div>
+        <div class="doc-card doc-card--optional">
+          <div class="doc-icon">🏠</div>
+          <h3>Accommodation Request <span class="tag-optional">Optional</span></h3>
+          <p>A brief statement explaining your need for on-site accommodation, if you wish to be considered. Accommodation is provided in-kind by the organizers, not as a monetary grant.</p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">📬</div>
+          <h3>Letter of Recommendation <span class="tag-student">Students Only</span></h3>
+          <p>One letter of recommendation from a chosen referee is required for all student applicants.</p>
+        </div>
+      </div>
+      <p class="app-note">
+        <strong>Note:</strong> Each accepted participant is required to present their poster in person during the school.
+      </p>
+    </section>
+
+    <!-- ===== Registration Fees ===== -->
+    <section class="container app-section">
+      <h2>Registration Fees</h2>
+      <p>Registration fees will be announced closer to the opening of applications. Fees are payable after acceptance.</p>
+      <div class="fee-grid">
+        <div class="fee-card">
+          <div class="fee-category">Students</div>
+          <div class="fee-amount">TBD</div>
+          <div class="fee-desc">Master's &amp; PhD students</div>
+        </div>
+        <div class="fee-card">
+          <div class="fee-category">Academics</div>
+          <div class="fee-amount">TBD</div>
+          <div class="fee-desc">Postdocs, staff scientists &amp; faculty</div>
+        </div>
+        <div class="fee-card">
+          <div class="fee-category">Professionals</div>
+          <div class="fee-amount">TBD</div>
+          <div class="fee-desc">Industry &amp; non-academic participants</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Selection Process ===== -->
+    <section class="container app-section">
+      <h2>Selection Process</h2>
+      <p>
+        Applications are reviewed by the program committee for both admission eligibility and accommodation support prioritization.
+        Selection is competitive — submitting a strong poster abstract and motivation statement is important.
+        Accepted applicants will be notified by <strong>November 1, 2026</strong>.
+      </p>
+      <p>
+        There is <strong>no application fee</strong>.
+      </p>
+    </section>
+
+    <!-- ===== Accommodation Support ===== -->
+    <section class="container app-section">
+      <h2>Accommodation Support</h2>
+      <p>
+        A limited number of accepted participants may be provided with <strong>on-site accommodation</strong> at or near OIST.
+        This is offered in-kind and is not a monetary grant — accommodation will be arranged and provided directly by the organizers.
+        Details will be announced with the opening of applications in August 2026.
+      </p>
+      <p class="app-note">
+        <strong>Note:</strong> Accommodation support does not cover travel expenses. Participants are responsible for arranging their own travel to Okinawa.
+      </p>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="container app-section">
+      <h2>Questions?</h2>
+      <p>
+        If you have questions about the application process, please contact us at
+        <a href="mailto:mlss2027@oist.jp">mlss2027@oist.jp</a>.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Machine Learning Summer School Okinawa | Powered by GitHub Pages</p>
+  </footer>
+</body>
+</html>

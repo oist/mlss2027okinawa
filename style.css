@@ -355,6 +355,82 @@ h2 {
 #venue a, #contact a  { color: var(--primary); font-weight: 600; }
 
 /* =========================
+   Travel Section
+   ========================= */
+#travel h3 {
+  color: var(--primary-dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1.75rem 0 0.5rem;
+}
+
+#travel p, #travel ul, #travel li {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+#travel ul {
+  padding-left: 1.4rem;
+  margin: 0.5rem 0 0;
+}
+
+.map-wrap {
+  margin: 1rem 0 1.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+
+.travel-img {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin: 1rem 0;
+}
+
+.travel-img--small {
+  max-width: 280px;
+}
+
+.travel-img-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.travel-img-grid figure {
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.travel-img-grid figure img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.travel-img-grid figcaption {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .travel-img-grid { grid-template-columns: repeat(2, 1fr); }
+  .travel-img--small { max-width: 100%; }
+}
+
+/* =========================
    Footer
    ========================= */
 footer {
