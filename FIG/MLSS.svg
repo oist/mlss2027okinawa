@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214 151">
+  <!-- MACHINE LEARNING SUMMER SCHOOL -->
+  <text x="107" y="15" text-anchor="middle"
+        font-family="'Arial Narrow', 'Helvetica Neue Condensed', Arial, sans-serif"
+        font-size="9.2" font-weight="700" letter-spacing="1.1"
+        fill="#6b1111">MACHINE LEARNING SUMMER SCHOOL</text>
+
+  <!-- MLSS block letters: thick outer stroke + thin white inner border -->
+  <text x="107" y="122" text-anchor="middle"
+        font-family="Impact, 'Arial Narrow', Arial, sans-serif"
+        font-size="92" textLength="210" lengthAdjust="spacingAndGlyphs"
+        fill="#6b1111" stroke="#6b1111" stroke-width="7"
+        paint-order="stroke fill">MLSS</text>
+  <text x="107" y="122" text-anchor="middle"
+        font-family="Impact, 'Arial Narrow', Arial, sans-serif"
+        font-size="92" textLength="210" lengthAdjust="spacingAndGlyphs"
+        fill="#6b1111" stroke="white" stroke-width="2.5">MLSS</text>
+
+  <!-- OKINAWA -->
+  <text x="107" y="148" text-anchor="middle"
+        font-family="'Arial Narrow', 'Helvetica Neue Condensed', Arial, sans-serif"
+        font-size="12.5" font-weight="700" letter-spacing="6.5"
+        fill="#6b1111">OKINAWA</text>
+</svg>
