@@ -64,6 +64,15 @@ header::before {
   pointer-events: none;
 }
 
+.header-logo {
+  display: block;
+  margin: 0 auto 1.4rem;
+  width: clamp(120px, 28vw, 200px);
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  position: relative;
+}
+
 header h1 {
   margin: 0 0 0.6rem;
   font-size: clamp(1.5rem, 4.5vw, 2.6rem);
