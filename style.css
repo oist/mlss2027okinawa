@@ -702,3 +702,35 @@ footer {
   .grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
   .card img { width: 70px; height: 70px; }
 }
+
+/* =========================
+   Scam Warning Banner
+   ========================= */
+.scam-warning {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: #fff5f5;
+  border: 2px solid #e53e3e;
+  border-left: 6px solid #e53e3e;
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1.3rem;
+  margin: 1.5rem 0 2rem;
+}
+.scam-warning__icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.scam-warning__body strong {
+  display: block;
+  color: #c53030;
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+.scam-warning__body p {
+  margin: 0;
+  color: #2d3748;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
