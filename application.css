@@ -209,10 +209,22 @@
   margin-bottom: 0.4rem;
 }
 
+.fee-approx {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
 .fee-desc {
   font-size: 0.82rem;
   color: var(--text-muted);
   line-height: 1.4;
+}
+
+.fee-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
 }
 
 /* Mobile */
