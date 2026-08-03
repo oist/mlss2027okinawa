@@ -158,6 +158,23 @@
   color: #1d4ed8;
 }
 
+/* FAQ */
+.faq-item {
+  margin-bottom: 1.25rem;
+}
+
+.faq-item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.faq-item p {
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 820px;
+  margin: 0;
+}
+
 /* Note callout */
 .app-note {
   background: #fefce8;
