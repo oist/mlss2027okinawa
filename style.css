@@ -82,6 +82,85 @@ header p {
 }
 
 /* =========================
+   Co-organizer logo band
+   ========================= */
+.co-org-band {
+  background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%);
+  padding: 1.4rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.co-org-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 2.5rem;
+}
+
+.co-org-label {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.co-org-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.2rem 2.8rem;
+}
+
+.co-org-logo {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.co-org-logo:hover,
+.co-org-logo:focus-visible {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.co-org-logo img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+
+.co-org-logo--oist {
+  height: 56px;
+}
+
+.co-org-logo--ism img {
+  height: 22px;
+}
+
+.co-org-logo--aip img {
+  height: 36px;
+}
+
+@media (max-width: 640px) {
+  .co-org-inner {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .co-org-logos {
+    width: 100%;
+    gap: 1.4rem 1.8rem;
+  }
+}
+
+/* =========================
    Navigation
    ========================= */
 nav {
