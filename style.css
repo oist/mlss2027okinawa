@@ -137,16 +137,26 @@ header p {
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
 }
 
-.co-org-logo--oist {
-  height: 56px;
+.co-org-logo--oist,
+.co-org-logo--ism,
+.co-org-logo--aip {
+  height: 72px;
 }
 
-.co-org-logo--ism img {
-  height: 22px;
+/* Full-color logos sit on a white chip so they read cleanly against the blue band */
+.co-org-logo-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.co-org-logo--aip img {
-  height: 36px;
+.co-org-logo-chip img {
+  filter: none;
 }
 
 @media (max-width: 640px) {
