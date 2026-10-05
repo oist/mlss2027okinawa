@@ -104,23 +104,22 @@ header p {
   gap: 0.7rem;
 }
 
-/* Wide screens: labels in a right-aligned column, logo rows left-aligned beside them */
-@media (min-width: 900px) {
+/* Wide screens: both groups side by side so all four logos share one row,
+   each label sitting above its own logos */
+@media (min-width: 1080px) {
   .co-org-inner {
-    display: grid;
-    grid-template-columns: max-content max-content;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: center;
-    align-items: center;
-    gap: 1.1rem 2.2rem;
+    gap: 2.8rem;
   }
   .co-org-group {
-    display: contents;
-  }
-  .co-org-group .co-org-label {
-    justify-self: end;
+    align-items: flex-start;
+    gap: 0.6rem;
   }
   .co-org-group .co-org-logos {
-    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 2rem;
   }
 }
 
