@@ -92,10 +92,36 @@ header p {
 
 .co-org-inner {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.9rem 2.5rem;
+  gap: 1.4rem;
+}
+
+.co-org-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+/* Wide screens: labels in a right-aligned column, logo rows left-aligned beside them */
+@media (min-width: 900px) {
+  .co-org-inner {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: center;
+    align-items: center;
+    gap: 1.1rem 2.2rem;
+  }
+  .co-org-group {
+    display: contents;
+  }
+  .co-org-group .co-org-label {
+    justify-self: end;
+  }
+  .co-org-group .co-org-logos {
+    justify-content: flex-start;
+  }
 }
 
 .co-org-label {
@@ -139,7 +165,8 @@ header p {
 
 .co-org-logo--oist,
 .co-org-logo--ism,
-.co-org-logo--aip {
+.co-org-logo--aip,
+.co-org-logo--aspire {
   height: 72px;
 }
 
@@ -160,10 +187,6 @@ header p {
 }
 
 @media (max-width: 640px) {
-  .co-org-inner {
-    flex-direction: column;
-    gap: 0.7rem;
-  }
   .co-org-logos {
     width: 100%;
     gap: 1.4rem 1.8rem;
