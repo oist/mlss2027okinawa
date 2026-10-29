@@ -203,6 +203,31 @@
   vertical-align: middle;
 }
 
+/* Rescheduled date row */
+.date-updated s {
+  color: var(--text-muted, #6b7280);
+  margin-right: 0.3rem;
+}
+
+.updated-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.75rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.app-update {
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #f59e0b;
+  background: #fffbeb;
+  border-radius: 6px;
+}
+
 /* Fee cards */
 .fee-grid {
   display: grid;
