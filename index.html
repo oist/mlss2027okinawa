@@ -298,7 +298,6 @@
   // 2) Time slots (editable)
   // =========================
   const slots = [
-    { key:"08:30-09:00", label:"08:30–09:00" }, // Registration (Mar 1)
     { key:"09:00-10:30", label:"09:00–10:30" },
     { key:"10:30-11:00", label:"10:30–11:00" }, // Coffee
     { key:"11:00-12:30", label:"11:00–12:30" },
@@ -333,8 +332,8 @@
   // Fixed (non-lecture) sessions
   const fixedSessions = {
     "2027-03-01": {
-      "08:30-09:00": { type:"event", speaker:"Registration", title:"", abstract:"Registration at OIST." },
-      "09:00-10:30": { type:"event", speaker:"Opening", title:"Opening & Orientation", abstract:"Opening remarks and orientation." }
+      "09:00-10:30": { type:"event", speaker:"Registration", title:"", abstract:"Registration at OIST." },
+      "10:30-11:00": { type:"event", speaker:"Opening", title:"Opening Remarks", abstract:"Opening remarks." }
     },
     "2027-03-12": {
       "16:00-17:30": { type:"event", speaker:"Closing", title:"Closing Session", abstract:"Closing remarks." }
@@ -359,8 +358,6 @@
                   : { type:"empty", speaker:"", title:"", abstract:"" };
       } else if (lectureSlots.has(s.key)){
         cell = { type:"lecture", speaker:"Lecture", title:"TBA", abstract:"" };
-      } else {
-        cell = { type:"empty", speaker:"", title:"", abstract:"" };
       }
       scheduleData[day][s.key] = cell;
     }
