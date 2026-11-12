@@ -231,7 +231,7 @@
 
   <section id="schedule" class="container">
   <h2>Schedule</h2>
-  <p>This is place holder.</p>
+  <p><strong>Tentative</strong> — the overall structure below is subject to change. Lecturers and lecture titles will be announced later.</p>
   <div class="schedule-wrap">
     <table class="schedule-table" id="scheduleTable" aria-label="MLSS schedule table">
       <thead>
@@ -298,103 +298,74 @@
   // 2) Time slots (editable)
   // =========================
   const slots = [
+    { key:"08:30-09:00", label:"08:30–09:00" }, // Registration (Mar 1)
     { key:"09:00-10:30", label:"09:00–10:30" },
     { key:"10:30-11:00", label:"10:30–11:00" }, // Coffee
     { key:"11:00-12:30", label:"11:00–12:30" },
-    { key:"13:00-14:00", label:"13:00–14:00" }, // Lunch
+    { key:"12:30-14:00", label:"12:30–14:00" }, // Lunch
     { key:"14:00-15:30", label:"14:00–15:30" },
     { key:"15:30-16:00", label:"15:30–16:00" }, // Coffee
     { key:"16:00-17:30", label:"16:00–17:30" },
-    { key:"18:00-19:00", label:"18:00–19:00" }  // Posters / Event
+    { key:"18:00-20:00", label:"18:00–20:00" }  // Evening events
   ];
 
   // =========================
-  // 3) Data (placeholders)
+  // 3) Data — TENTATIVE overall structure only.
+  // Lecture assignments are not published yet (shown as "Lecture / TBA").
   // scheduleData[YYYY-MM-DD][slotKey] = { type, speaker, title, abstract }
-  // type: "talk" | "break" | "event"
+  // type: "talk" | "lecture" | "break" | "event" | "empty"
   // =========================
   const scheduleData = {};
 
-const lectureSlots = new Set(["09:00-10:30","11:00-12:30","14:00-15:30","16:00-17:30"]);
-const coffeeSlots  = new Set(["10:30-11:00","15:30-16:00"]);
-const lunchSlots   = new Set(["13:00-14:00"]);
-const eveningSlots = new Set(["18:00-19:00"]);
+  const lectureSlots = new Set(["09:00-10:30","11:00-12:30","14:00-15:30","16:00-17:30"]);
+  const coffeeSlots  = new Set(["10:30-11:00","15:30-16:00"]);
+  const lunchSlots   = new Set(["12:30-14:00"]);
 
-for(const d of days){
-  const day = isoDate(d);
-  const weekday = d.getDay(); // 0=Sun, 6=Sat
-  scheduleData[day] = {};
-
-  // ===== Sunday: No schedule =====
-  if (weekday === 0){
-    for(const s of slots){
-      scheduleData[day][s.key] = {
-        type:"empty",
-        speaker:"",
-        title:"",
-        abstract:""
-      };
-    }
-    continue;
-  }
-
-  // ===== Saturday: Excursion =====
-  if (weekday === 6){
-    for(const s of slots){
-      scheduleData[day][s.key] = {
-        type:"event",
-        speaker:"Excursion",
-        title:"Excursion Day",
-        abstract:"Details of the excursion will be announced."
-      };
-    }
-    continue;
-  }
-
-  // ===== Weekdays: Normal MLSS schedule =====
-  for(const s of slots){
-    if (coffeeSlots.has(s.key)){
-      scheduleData[day][s.key] = {
-        type:"break",
-        speaker:"Coffee Break",
-        title:"",
-        abstract:""
-      };
-    }
-    else if (lunchSlots.has(s.key)){
-      scheduleData[day][s.key] = {
-        type:"break",
-        speaker:"Lunch Break",
-        title:"",
-        abstract:""
-      };
-    }
-    else if (eveningSlots.has(s.key)){
-      scheduleData[day][s.key] = {
-        type:"event",
-        speaker:"Poster Session",
-        title:"Poster / Social",
-        abstract:"Poster session and discussion."
-      };
-    }
-    else{
-      scheduleData[day][s.key] = {
-        type:"talk",
-        speaker:"speaker",
-        title:"title",
-        abstract:"(placeholder)\nWrite the abstract here."
-      };
-    }
-  }
-}  
-
-  // Example overrides (optional)
-  scheduleData["2027-03-01"]["09:00-10:30"] = {
-    type:"talk",
-    speaker:"speaker",
-    title:"title",
-    abstract:"(placeholder)\nExample abstract for the first slot."
+  // Evening events (18:00–20:00)
+  const eveningEvents = {
+    "2027-03-01": { title:"Reception & Poster Session 1", abstract:"Welcome reception and the first poster session." },
+    "2027-03-03": { title:"Poster Session 2 with Dinner", abstract:"Poster session with dinner." },
+    "2027-03-05": { title:"Poster Session 3 with Dinner", abstract:"Poster session with dinner." },
+    "2027-03-08": { title:"Banquet & Poster Session 4",   abstract:"Banquet and poster session." },
+    "2027-03-10": { title:"Poster Session 5 with Dinner", abstract:"Poster session with dinner." }
   };
+
+  // Fixed (non-lecture) sessions
+  const fixedSessions = {
+    "2027-03-01": {
+      "08:30-09:00": { type:"event", speaker:"Registration", title:"", abstract:"Registration at OIST." },
+      "09:00-10:30": { type:"event", speaker:"Opening", title:"Opening & Orientation", abstract:"Opening remarks and orientation." }
+    },
+    "2027-03-12": {
+      "16:00-17:30": { type:"event", speaker:"Closing", title:"Closing Session", abstract:"Closing remarks." }
+    }
+  };
+
+  for(const d of days){
+    const day = isoDate(d);
+    scheduleData[day] = {};
+    const weekday = d.getDay(); // 0=Sun, 6=Sat (weekends are rendered separately below)
+    if (weekday === 0 || weekday === 6) continue;
+
+    for(const s of slots){
+      let cell;
+      if (coffeeSlots.has(s.key)){
+        cell = { type:"break", speaker:"Coffee Break", title:"", abstract:"" };
+      } else if (lunchSlots.has(s.key)){
+        cell = { type:"break", speaker:"Lunch Break", title:"", abstract:"" };
+      } else if (s.key === "18:00-20:00"){
+        const ev = eveningEvents[day];
+        cell = ev ? { type:"event", speaker:ev.title, title:"", abstract:ev.abstract }
+                  : { type:"empty", speaker:"", title:"", abstract:"" };
+      } else if (lectureSlots.has(s.key)){
+        cell = { type:"lecture", speaker:"Lecture", title:"TBA", abstract:"" };
+      } else {
+        cell = { type:"empty", speaker:"", title:"", abstract:"" };
+      }
+      scheduleData[day][s.key] = cell;
+    }
+    if (fixedSessions[day]) Object.assign(scheduleData[day], fixedSessions[day]);
+  }
 
   // =========================
   // 4) Build table HTML
@@ -453,7 +424,7 @@ for(let rowIndex=0; rowIndex<slots.length; rowIndex++){
         } else {
           box.classList.remove("event");
           box.classList.add("empty");
-          box.innerHTML = "<div>No Schedule</div>";
+          box.innerHTML = "<div>Free Day</div>";
         }
 
         td.appendChild(box);
@@ -472,6 +443,7 @@ for(let rowIndex=0; rowIndex<slots.length; rowIndex++){
 
     if (cellData?.type === "break") box.classList.add("break");
     if (cellData?.type === "event") box.classList.add("event");
+    if (cellData?.type === "empty") box.classList.add("empty");
 
     const sp = document.createElement("p");
     sp.className = "speaker";
@@ -494,7 +466,7 @@ for(let rowIndex=0; rowIndex<slots.length; rowIndex++){
 
       const hint = document.createElement("div");
       hint.className = "hint";
-      hint.textContent = "Click to view abstract";
+      hint.textContent = "Click for details";
       box.appendChild(hint);
     }
 
