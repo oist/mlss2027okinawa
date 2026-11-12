@@ -245,6 +245,14 @@
       </tbody>
     </table>
   </div>
+  <h3>Excursion (Saturday, March 6)</h3>
+  <p>
+    The excursion will be to either the <a href="https://churaumi.okinawa/en/" target="_blank" rel="noopener">Okinawa Churaumi Aquarium</a>,
+    one of the largest aquariums in the world, famous for its whale sharks and manta rays,
+    or <a href="https://www.gyokusendo.co.jp/okinawaworld/" target="_blank" rel="noopener">Okinawa World</a>
+    (Japanese website), a theme park featuring the Gyokusendo limestone cave and a traditional Ryukyu village.
+    Details will be announced later.
+  </p>
 </section>
 
 <!-- =========================
@@ -418,7 +426,9 @@ for(let rowIndex=0; rowIndex<slots.length; rowIndex++){
         box.style.fontWeight = "bold";
 
         if(weekday === 6){
-          box.innerHTML = "<div>Excursion Day</div>";
+          box.innerHTML = '<div>Excursion Day<div style="font-weight:normal;font-size:0.85em;margin-top:6px;">'
+            + '<a href="https://churaumi.okinawa/en/" target="_blank" rel="noopener">Churaumi Aquarium</a><br>or<br>'
+            + '<a href="https://www.gyokusendo.co.jp/okinawaworld/" target="_blank" rel="noopener">Okinawa World</a></div></div>';
         } else {
           box.classList.remove("event");
           box.classList.add("empty");
